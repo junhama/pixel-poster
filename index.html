@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="レトロ8bit風イベント告知メーカー - pixel-poster">
+    <meta name="theme-color" content="#FF6B6B">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="pixel-poster">
+    <title>pixel-poster - レトロイベント告知メーカー</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+<link rel="icon" href="_favicon.svg" type="image/svg+xml">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">メインコンテンツへ</a>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-top">
+                <h1>🎨 pixel-poster</h1>
+                <button class="btn-premium" id="premiumBtn" onclick="openPremiumModal()">
+                    <span class="premium-badge">👑</span>
+                </button>
+            </div>
+            <p class="subtitle">レトロ8bit風イベント告知・メーカー</p>
+        </header>
+
+        <main id="main-content" class="main-content">
+            <!-- Template Selection -->
+            <section class="section templates-section" aria-labelledby="templates-heading">
+                <h2 id="templates-heading">テンプレートを選択</h2>
+                <div class="templates-grid" role="radiogroup" aria-label="テンプレート選択">
+                    <div class="template-card active" data-template="event" role="radio" aria-checked="true" tabindex="0" aria-label="イベント告知テンプレート">
+                        <span class="template-icon" aria-hidden="true">🎪</span>
+                        <span class="template-name">イベント告知</span>
+                    </div>
+                    <div class="template-card" data-template="sale" role="radio" aria-checked="false" tabindex="-1" aria-label="セール告知テンプレート">
+                        <span class="template-icon" aria-hidden="true">🛍️</span>
+                        <span class="template-name">セール告知</span>
+                    </div>
+                    <div class="template-card" data-template="blog" role="radio" aria-checked="false" tabindex="-1" aria-label="個人ブロマガテンプレート">
+                        <span class="template-icon" aria-hidden="true">📝</span>
+                        <span class="template-name">個人ブロマガ</span>
+                    </div>
+                    <div class="template-card" data-template="game" role="radio" aria-checked="false" tabindex="-1" aria-label="ゲーム配信テンプレート">
+                        <span class="template-icon" aria-hidden="true">🎮</span>
+                        <span class="template-name">ゲーム配信</span>
+                    </div>
+                    <div class="template-card premium" data-template="festival" role="radio" aria-checked="false" tabindex="-1" aria-label="夏祭りテンプレート" data-premium="true">
+                        <span class="template-icon" aria-hidden="true">🎆</span>
+                        <span class="template-name">夏祭り<span class="premium-tag">👑</span></span>
+                    </div>
+                    <div class="template-card premium" data-template="concert" role="radio" aria-checked="false" tabindex="-1" aria-label="ライブ告知テンプレート" data-premium="true">
+                        <span class="template-icon" aria-hidden="true">🎸</span>
+                        <span class="template-name">ライブ<span class="premium-tag">👑</span></span>
+                    </div>
+                    <div class="template-card premium" data-template="workshop" role="radio" aria-checked="false" tabindex="-1" aria-label="ワークショップテンプレート" data-premium="true">
+                        <span class="template-icon" aria-hidden="true">🔧</span>
+                        <span class="template-name">ワークショップ<span class="premium-tag">👑</span></span>
+                    </div>
+                    <div class="template-card premium" data-template="online" role="radio" aria-checked="false" tabindex="-1" aria-label="オンラインイベントテンプレート" data-premium="true">
+                        <span class="template-icon" aria-hidden="true">💻</span>
+                        <span class="template-name">オンライン<span class="premium-tag">👑</span></span>
+                    </div>
+                    <div class="template-card premium" data-template="birthday" role="radio" aria-checked="false" tabindex="-1" aria-label="誕生日カードテンプレート" data-premium="true">
+                        <span class="template-icon" aria-hidden="true">🎂</span>
+                        <span class="template-name">誕生日<span class="premium-tag">👑</span></span>
+                    </div>
+                    <div class="template-card premium" data-template="thankyou" role="radio" aria-checked="false" tabindex="-1" aria-label="感謝カードテンプレート" data-premium="true">
+                        <span class="template-icon" aria-hidden="true">💝</span>
+                        <span class="template-name">感謝カード<span class="premium-tag">👑</span></span>
+                    </div>
+                    <div class="template-card premium" data-template="release" role="radio" aria-checked="false" tabindex="-1" aria-label="新作出品テンプレート" data-premium="true">
+                        <span class="template-icon" aria-hidden="true">🚀</span>
+                        <span class="template-name">新作出品<span class="premium-tag">👑</span></span>
+                    </div>
+                    <div class="template-card premium" data-template="limited" role="radio" aria-checked="false" tabindex="-1" aria-label="期間限定テンプレート" data-premium="true">
+                        <span class="template-icon" aria-hidden="true">⏰</span>
+                        <span class="template-name">期間限定<span class="premium-tag">👑</span></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Editor Section -->
+            <section class="section editor-section" aria-labelledby="editor-heading">
+                <h2 id="editor-heading">テキスト編集</h2>
+                <div class="input-group">
+                    <label for="posterTitle">タイトル</label>
+                    <input type="text" id="posterTitle" placeholder="イベント名を入力" maxlength="30" aria-describedby="title-help">
+                </div>
+                <div class="input-group">
+                    <label for="posterBody">本文</label>
+                    <textarea id="posterBody" placeholder="詳細を入力（改行可能）" maxlength="120" rows="3" aria-describedby="body-help"></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="posterDate">日時・場所</label>
+                    <input type="text" id="posterDate" placeholder="例: 2026.03.25 14:00〜 / 渋谷" maxlength="40" aria-describedby="date-help">
+                </div>
+            </section>
+
+            <!-- Icon Selection -->
+            <section class="section icons-section" aria-labelledby="icons-heading">
+                <h2 id="icons-heading">アイコンを配置 <span class="selected-count">(<span id="iconCount" aria-live="polite">0</span>/3)</span></h2>
+                <div class="icons-grid" id="iconsGrid" role="group" aria-label="アイコン選択"></div>
+                <div class="icon-placement">
+                    <p id="placed-label">選択したアイコン:</p>
+                    <div class="placed-icons" id="placedIcons" role="list" aria-labelledby="placed-label">
+                        <<!-- Premium Modal -->
+<div class="modal" id="premiumModal" onclick="closePremiumModal(event)">
+  <div class="modal-content premium-content">
+    <h3>👑 Premiumプラン</h3>
+    <p class="premium-desc">すべての機能をアンロック</p>
+    <div class="pricing-cards">
+      <div class="pricing-card monthly" onclick="subscribe('monthly')">
+        <div class="price">¥480<span>/月</span></div>
+        <ul>
+          <li>✓ 12テンプレート全て使用可能</li>
+          <li>✓ 高画質書き出し (4x)</li>
+          <li>✓ カスタム配色作成</li>
+          <li>✓ 広告非表示</li>
+          <li>✓ 無制限履歴</li>
+        </ul>
+        <button class="btn-subscribe">月額プラン</button>
+      </div>
+      <div class="pricing-card yearly" onclick="subscribe('yearly')">
+        <div class="price">¥4,800<span>/年</span></div>
+        <div class="save-badge">17% OFF</div>
+        <ul>
+          <li>✓ 12テンプレート全て使用可能</li>
+          <li>✓ 高画質書き出し (4x)</li>
+          <li>✓ カスタム配色作成</li>
+          <li>✓ 広告非表示</li>
+          <li>✓ 無制限履歴</li>
+        </ul>
+        <button class="btn-subscribe highlight">年額プラン</button>
+      </div>
+    </div>
+    <p id="premiumStatus" class="premium-status hidden">有効期限: <span></span></p>
+    <button class="btn-close-modal" onclick="closePremiumModal()">閉じる</button>
+  </div>
+</div>
+<!-- Quality Selector -->
+<div class="quality-section" id="qualitySection">
+  <h3>書き出し品質</h3>
+  <div class="quality-options">
+    <label class="quality-option">
+      <input type="radio" name="quality" value="2" checked onchange="setQuality(2)">
+      <span>標準 (2x)</span>
+    </label>
+    <label class="quality-option premium-feature" id="quality4x">
+      <input type="radio" name="quality" value="4" disabled onchange="setQuality(4)">
+      <span>高画質 (4x) <span class="premium-tag">👑</span></span>
+    </label>
+  </div>
+</div>
+<!-- Custom Palette Creator -->
+<div class="section custom-palette-section" id="customPaletteSection" style="display:none;">
+  <h2>カスタム配色 <span class="premium-tag">👑</span></h2>
+  <div class="custom-palette">
+    <div class="color-pickers">
+      <label>カラー1: <input type="color" id="customColor1" value="#FF6B6B"></label>
+      <label>カラー2: <input type="color" id="customColor2" value="#4ECDC4"></label>
+      <label>カラー3: <input type="color" id="customColor3" value="#FFE66D"></label>
+    </div>
+    <button class="btn-apply" onclick="applyCustomPalette()">適用</button>
+  </div>
+</div>
+<style>
+.premium-content { max-width: 480px; }
+.premium-desc { text-align: center; color: #666; margin-bottom: 1rem; }
+.pricing-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+.pricing-card { background: #f8f9fa; border-radius: 12px; padding: 1.2rem; border: 2px solid transparent; cursor: pointer; position: relative; }
+.pricing-card:hover { border-color: #6C5CE7; }
+.pricing-card.yearly { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+.pricing-card.yearly ul li { color: rgba(255,255,255,0.9); }
+.price { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+.price span { font-size: 0.9rem; font-weight: 400; }
+.save-badge { position: absolute; top: -8px; right: 10px; background: #FFD700; color: #333; padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+.pricing-card ul { list-style: none; padding: 0; margin: 1rem 0; }
+.pricing-card ul li { margin: 0.4rem 0; font-size: 0.85rem; }
+.btn-subscribe { width: 100%; padding: 0.8rem; background: #6C5CE7; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+.btn-subscribe.highlight { background: #FFD700; color: #333; }
+.btn-close-modal { width: 100%; margin-top: 1rem; padding: 0.8rem; background: #e9ecef; border: none; border-radius: 8px; cursor: pointer; }
+.premium-status { text-align: center; color: #28a745; font-weight: 600; margin-top: 1rem; }
+.quality-section { background: white; border-radius: 12px; padding: 1rem; margin: 1rem 0; }
+.quality-options { display: flex; gap: 1rem; margin-top: 0.5rem; }
+.quality-option { flex: 1; padding: 0.8rem; background: #f8f9fa; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; }
+.quality-option input { margin: 0; }
+.quality-option.premium-feature { opacity: 0.5; }
+.quality-option.premium-feature.subscribed { opacity: 1; }
+.custom-palette-section { display: none; }
+.custom-palette-section.premium-active { display: block; }
+.color-pickers { display: flex; gap: 1rem; margin: 1rem 0; }
+.color-pickers label { flex: 1; text-align: center; }
+.color-pickers input[type="color"] { width: 100%; height: 40px; border: none; border-radius: 8px; cursor: pointer; }
+.btn-apply { width: 100%; padding: 0.8rem; background: #6C5CE7; color: white; border: none; border-radius: 8px; cursor: pointer; }
+@media (max-width: 480px) {
+  .pricing-cards { grid-template-columns: 1fr; }
+}
+</style>
